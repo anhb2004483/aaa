@@ -1,54 +1,51 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
-
-.container {
-  width: 60%;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin: 20px;
 }
 
 h1 {
-  text-align: center;
-  color: #333;
+    color: #333;
 }
 
-.data-section {
-  margin-bottom: 20px;
+#login-container {
+    margin-bottom: 20px;
 }
 
-.data-section p {
-  font-size: 1.2em;
-  margin: 10px 0;
+input {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+    width: 200px;
 }
 
-.input-section {
-  text-align: center;
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-.input-section input {
-  width: 60%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+button:hover {
+    background-color: #0056b3;
 }
 
-#submit-btn {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+#data-table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-#submit-btn:hover {
-  background-color: #218838;
+#data-table th, #data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#data-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+#login-message {
+    color: red;
+    margin-top: 10px;
 }
