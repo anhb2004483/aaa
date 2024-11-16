@@ -75,6 +75,9 @@ const snRefs = {
   }
 };
 
+// Tham chiếu đến phần tử thông báo
+const alertMessage = document.getElementById('alert-message');
+
 // Hàm lấy và hiển thị dữ liệu cho từng sensor
 const fetchDataForSensor = (sensorKey, refs) => {
   onValue(ref(database, `${sensorKey}/object`), (snapshot) => {
@@ -97,6 +100,22 @@ const fetchDataForSensor = (sensorKey, refs) => {
       refs.khancap.textContent = 'N/A';
     }
   });
+};
+
+// Hàm kiểm tra và hiển thị cảnh báo nếu vượt ngưỡng
+const checkThreshold = (sensorKey, gasValue, tempValue, gasThreshold, tempThreshold) => {
+  if (
+    (gasValue !== undefined && gasThreshold !== undefined && gasValue > gasThreshold) ||
+    (tempValue !== undefined && tempThreshold !== undefined && tempValue > tempThreshold)
+  ) {
+    alertMessage.textContent = `Cảnh báo: Sensor ${sensorKey} đang vượt quá ngưỡng cho phép!`;
+    alertMessage.classList.add('error');
+    alertMessage.classList.remove('success');
+  } else {
+    alertMessage.textContent = `Các giá trị của Sensor ${sensorKey} đang trong ngưỡng an toàn.`;
+    alertMessage.classList.add('success');
+    alertMessage.classList.remove('error');
+  }
 };
 
 // Gọi hàm lấy dữ liệu cho từng sensor
