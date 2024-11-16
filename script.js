@@ -80,18 +80,35 @@ const alertMessage = document.getElementById('alert-message');
 
 // Hàm lấy và hiển thị dữ liệu cho từng sensor
 const fetchDataForSensor = (sensorKey, refs) => {
+  let gasValue, tempValue, gasThreshold, tempThreshold;
+
+  // Lấy giá trị nhiệt độ
   onValue(ref(database, `${sensorKey}/object`), (snapshot) => {
-    refs.object.textContent = snapshot.val() || 'N/A';
+    tempValue = snapshot.val();
+    refs.object.textContent = tempValue || 'N/A';
+    checkThreshold(sensorKey, gasValue, tempValue, gasThreshold, tempThreshold);
   });
+
+  // Lấy giá trị gas
   onValue(ref(database, `${sensorKey}/gas`), (snapshot) => {
-    refs.gas.textContent = snapshot.val() || 'N/A';
+    gasValue = snapshot.val();
+    refs.gas.textContent = gasValue || 'N/A';
+    checkThreshold(sensorKey, gasValue, tempValue, gasThreshold, tempThreshold);
   });
+
+  // Lấy ngưỡng gas
   onValue(ref(database, `${sensorKey}/Gas_threshold`), (snapshot) => {
-    refs.gasThreshold.textContent = snapshot.val() || 'N/A';
+    gasThreshold = snapshot.val();
+    refs.gasThreshold.textContent = gasThreshold || 'N/A';
   });
+
+  // Lấy ngưỡng nhiệt độ
   onValue(ref(database, `${sensorKey}/Temp_threshold`), (snapshot) => {
-    refs.tempThreshold.textContent = snapshot.val() || 'N/A';
+    tempThreshold = snapshot.val();
+    refs.tempThreshold.textContent = tempThreshold || 'N/A';
   });
+
+  // Lấy trạng thái khẩn cấp
   onValue(ref(database, `${sensorKey}/khancap`), (snapshot) => {
     if (snapshot.exists()) {
       const khancapValue = snapshot.val();
@@ -120,6 +137,7 @@ const checkThreshold = (sensorKey, gasValue, tempValue, gasThreshold, tempThresh
 
 // Gọi hàm lấy dữ liệu cho từng sensor
 Object.keys(snRefs).forEach(sensorKey => fetchDataForSensor(sensorKey, snRefs[sensorKey]));
+
 
 // Đăng nhập
 const loginButton = document.getElementById('login-button');
