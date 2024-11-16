@@ -185,3 +185,18 @@ td {
     font-size: 14px;
     color: red;
 }
+
+
+.alert {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.alert.error {
+    color: red;
+}
+
+.alert.success {
+    color: green;
+}
